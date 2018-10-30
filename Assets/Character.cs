@@ -11,13 +11,14 @@ public class Character : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip JumpSound;
     public AudioClip DeathSound;
-
+    public GameObject effect;
     private Vector2 touchOrigin = - Vector2.one;
 
     //Para evitar pulo Duplo
     bool jumped = false;
     bool IsHurt = false;
     public float jumpForce = 300f;
+    bool goToNextLevel = false;
 
     float horizontalMove = 0;
     public float runSpeed = 20f;
@@ -70,6 +71,8 @@ public class Character : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
             audioSource.PlayOneShot(JumpSound);
+            Instantiate(effect, transform.position, Quaternion.identity);
+
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
         }
 
@@ -105,6 +108,17 @@ public class Character : MonoBehaviour
         audioSource.PlayOneShot(DeathSound);
         StartCoroutine(Restart());
         
+    }
+
+    public void Pular()
+    {
+            jumped = true;
+            jump = true;
+            animator.SetBool("IsJumping", true);
+            audioSource.PlayOneShot(JumpSound);
+            Instantiate(effect, transform.position, Quaternion.identity);
+
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
     }
 
     IEnumerator Restart()

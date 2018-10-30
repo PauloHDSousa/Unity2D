@@ -16,7 +16,7 @@ public class LevelLoader : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown("Jump")) && playerInZone)
+        if (/*(Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown("Jump")) || */ playerInZone)
         {
             SceneManager.LoadScene(levelToLoad);
         }

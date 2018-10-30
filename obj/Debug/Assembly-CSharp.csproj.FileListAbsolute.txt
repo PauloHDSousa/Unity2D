@@ -81,7 +81,6 @@ C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.WindModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.XRModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityScript.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityScript.Lang.dll
-C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\Vuforia.UnityExtensions.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\Unity.Cecil.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\Unity.SerializationLogic.dll
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\Unity.DataContract.dll
@@ -157,7 +156,6 @@ C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.XRModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.UI.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.Timeline.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.Networking.xml
-C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\Vuforia.UnityExtensions.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\Paulo\Downloads\2DAssets\Temp\bin\Debug\UnityEngine.SpatialTracking.xml

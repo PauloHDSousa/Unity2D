@@ -1,4 +1,4 @@
-#Sun Oct 28 21:57:00 BRT 2018
+#Mon Oct 29 22:14:03 BRT 2018
 base.0=C\:\\Users\\Paulo\\Downloads\\2DAssets\\Temp\\gradleOut\\build\\intermediates\\transforms\\dex\\release\\0
 path.0=classes.dex
 renamed.0=classes.dex
