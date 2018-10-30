@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
@@ -11,7 +12,7 @@ public class Character : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip JumpSound;
     public AudioClip DeathSound;
-    public GameObject effect;
+    public Canvas canvas;
     private Vector2 touchOrigin = - Vector2.one;
 
     //Para evitar pulo Duplo
@@ -19,49 +20,37 @@ public class Character : MonoBehaviour
     bool IsHurt = false;
     public float jumpForce = 300f;
     bool goToNextLevel = false;
+   
 
     float horizontalMove = 0;
     public float runSpeed = 20f;
     bool jump = false;
     bool crouch = false;
     public Joystick joystick;
+    Text tm;
+    void Start()
+    {
+
+        //ngo = new GameObject("myTextGO");
+        Text tm = canvas.gameObject.AddComponent<Text>();
+        tm.text = "put your text here";
+        tm.color = new Color(255f, 0f, 0f);
+        tm.fontStyle = FontStyle.Bold;
+        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
+        tm.font = ArialFont;
+        tm.fontSize = 20;
+
+        //ngo.transform.SetParent(canvas.transform);
+
+    }
 
     void Update()
     {
-        //if(Input.touchCount > 0)
-        //{
-        //    Touch myTouch = Input.touches[0];
-        //    if(myTouch.phase == TouchPhase.Began)
-        //        touchOrigin = myTouch.position;
-        //    else if(myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
-        //    {
-        //        Vector2 touchEnd = myTouch.position;
-        //        float x = touchEnd.x - touchOrigin.x;
-        //        float y = touchEnd.y - touchOrigin.y;
-        //        touchOrigin.x = -1;
-        //        if(Mathf.Abs(x) > Mathf.Abs(y))
-        //            horizontalMove = x > 0 ? 1 : -1;
-        //        else
-        //            vertical = y > 0 ? 1 : -1;
-        //    }
-        //} 
-        //else {
-            //if(joystick.Horizontal <= 0 )
-            //    horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-            //else
-                horizontalMove = joystick.Horizontal * runSpeed;
-            //}
+        //ngo.transform.position = new Vector3(0, 0, 0);
+        //tm.transform.position = new Vector3(0, 0, 0);
 
-        //if()
 
-        //Vector3 moveVector = (Vector3.right * joystick.Horizontal + Vector3.up * joystick.Vertical);
-
-        //if (moveVector != Vector3.zero)
-        //{ 
-        //    transform.rotation = Quaternion.LookRotation(Vector3.forward, moveVector);
-        //    transform.Translate(moveVector * runSpeed * Time.deltaTime, Space.World);
-        //}
-
+      horizontalMove = joystick.Horizontal * runSpeed;
        
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -71,7 +60,7 @@ public class Character : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
             audioSource.PlayOneShot(JumpSound);
-            Instantiate(effect, transform.position, Quaternion.identity);
+            //Instantiate(effect, transform.position, Quaternion.identity);
 
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
         }
@@ -107,18 +96,19 @@ public class Character : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(DeathSound);
         StartCoroutine(Restart());
-        
     }
 
     public void Pular()
     {
+
+        if (!jumped && !IsHurt)
+        {
             jumped = true;
             jump = true;
             animator.SetBool("IsJumping", true);
             audioSource.PlayOneShot(JumpSound);
-            Instantiate(effect, transform.position, Quaternion.identity);
-
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+        }
     }
 
     IEnumerator Restart()

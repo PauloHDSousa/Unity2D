@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Paulo/Desktop/Jogo_v5.apk
+C:/Users/psousa/Desktop/V2.apk
 SceneListBegin?
 Assets/Levels/Menu.unity
 Assets/Levels/Level0.unity
