@@ -5,17 +5,42 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
-    string[] falasAleatorias = { "Outra vez?", "O que está acontecendo?", "Isto é um sonho?!", "Eu sou um gato ou uma raposa?", "Se eu cair da plataforma, será que eu morro?", "Quantas vidas será que eu tenho?", "E se eu dormir?", "Se um gato tem 7 vidas,ele pode morrer 7 ou 8 vezes?", "Quero minha dona" };
+    string[] falasAleatorias = { "Outra vez?", "O que está acontecendo?",
+        "Isto é um sonho?!",
+        "Eu sou um gato ou uma raposa?",
+        "Essa música me da vontade de dançar",
+        "Quantas vidas será que eu tenho?",
+        "E se eu dormir?",
+        "Se um gato tem 7 vidas, ele pode morrer 7 ou 8 vezes?",
+        "Quero meu dono",
+        "Eu adoraria as manhãs, se elas começassem mais tarde!",
+        "Prefiro calçar as botas do que fazer exercício.",
+        "Odeio as Segundas-feiras!",
+        "É difícil ser humilde quando se é o melhor.",
+        "Dormir abre-me o apetite, comer me da sono... a vida é bela",
+        "Não sou gordo. Sou é baixo para o meu peso.",
+        "Eu já falei que quero minha casa?",
+        "Nunca mais vou comer lixo da vizinha",
+        "Uma vez eu estava comendo o lixo e o bob me atacou, cara...",
+        "Miau!",
+        "Ouvi dizer que 5 patinhos foram passear, sem a mãe deles",
+        "LAMBDA LAMBDA LAMBDA Nerds! meu dono ouvia isso direto...",
+        "Porque uma pessoa adota um cachorro se existem gatos?",
+        "Você conhece a piada do gato? claro que não, gato não pia"
+    };
+
     public CharacterController2D controller;
     public Animator animator;
     public GameObject Floor;
     public AudioSource audioSource;
     public AudioClip JumpSound;
     public AudioClip DeathSound;
+    public AudioClip FallingSound;
     public Canvas canvas;
     private Vector2 touchOrigin = -Vector2.one;
     public Text dialog;
     bool primeiraQueda = true;
+
     //Para evitar pulo Duplo
     bool jumped = false;
     bool IsHurt = false;
@@ -30,12 +55,14 @@ public class Character : MonoBehaviour
     void Start()
     {
         animator.SetBool("IsHurt", true);
+        if (primeiraQueda)
+        {
+            audioSource.PlayOneShot(FallingSound);
+        }
     }
 
     void Update()
     {
-
-
         horizontalMove = joystick.Horizontal * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
