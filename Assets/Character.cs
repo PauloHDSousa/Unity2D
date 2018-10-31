@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
-
+    string[] falasAleatorias = { "Outra vez?", "O que está acontecendo?", "Isto é um sonho?!", "Eu sou um gato ou uma raposa?", "Se eu cair da plataforma, será que eu morro?", "Quantas vidas será que eu tenho?", "E se eu dormir?", "Se um gato tem 7 vidas,ele pode morrer 7 ou 8 vezes?", "Quero minha dona" };
     public CharacterController2D controller;
     public Animator animator;
     public GameObject Floor;
@@ -13,45 +13,30 @@ public class Character : MonoBehaviour
     public AudioClip JumpSound;
     public AudioClip DeathSound;
     public Canvas canvas;
-    private Vector2 touchOrigin = - Vector2.one;
-
+    private Vector2 touchOrigin = -Vector2.one;
+    public Text dialog;
+    bool primeiraQueda = true;
     //Para evitar pulo Duplo
     bool jumped = false;
     bool IsHurt = false;
     public float jumpForce = 300f;
-    bool goToNextLevel = false;
-   
 
     float horizontalMove = 0;
     public float runSpeed = 20f;
     bool jump = false;
     bool crouch = false;
     public Joystick joystick;
-    Text tm;
+
     void Start()
     {
-
-        //ngo = new GameObject("myTextGO");
-        Text tm = canvas.gameObject.AddComponent<Text>();
-        tm.text = "put your text here";
-        tm.color = new Color(255f, 0f, 0f);
-        tm.fontStyle = FontStyle.Bold;
-        Font ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
-        tm.font = ArialFont;
-        tm.fontSize = 20;
-
-        //ngo.transform.SetParent(canvas.transform);
-
+        animator.SetBool("IsHurt", true);
     }
 
     void Update()
     {
-        //ngo.transform.position = new Vector3(0, 0, 0);
-        //tm.transform.position = new Vector3(0, 0, 0);
 
 
-      horizontalMove = joystick.Horizontal * runSpeed;
-       
+        horizontalMove = joystick.Horizontal * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if ((Input.GetButtonDown("Jump") || joystick.Vertical > 0) && !jumped && !IsHurt)
@@ -79,6 +64,15 @@ public class Character : MonoBehaviour
         jump = false;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Placa"))
+        {
+            var randomInt = Random.Range(0,falasAleatorias.Length);
+            DefineMensagemDialogo(falasAleatorias[randomInt]);
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -86,6 +80,12 @@ public class Character : MonoBehaviour
         {
             jumped = false;
             animator.SetBool("IsJumping", false);
+            animator.SetBool("IsHurt", IsHurt);
+            if (primeiraQueda)
+            {
+                DefineMensagemDialogo("Aonde estou?");
+                primeiraQueda = false;
+            }
         }
     }
 
@@ -113,7 +113,19 @@ public class Character : MonoBehaviour
 
     IEnumerator Restart()
     {
-        yield return new WaitForSeconds(2); 
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    void DefineMensagemDialogo(string mensagem)
+    {
+        dialog.text = mensagem;
+        dialog.gameObject.SetActive(true);
+        StartCoroutine(EscondeMensagemDialogo());
+    }
+
+    IEnumerator EscondeMensagemDialogo()
+    {
+        yield return new WaitForSeconds(3);
+        dialog.gameObject.SetActive(false);
     }
 }

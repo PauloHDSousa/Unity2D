@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 78803905b8fa52146b613651f631f87b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Grande October Four
+  fontNames:
+  - Grande October Four
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5385e8c12ee174d4bacd77763761cb8d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
