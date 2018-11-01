@@ -389,7 +389,6 @@ C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.ProfilerMod
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SharedInternalsModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
-C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpriteMaskModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpriteShapeModule.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.StandardEvents.dll
@@ -467,7 +466,6 @@ C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.Physics2DMo
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.ProfilerModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SharedInternalsModule.xml
-C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpriteMaskModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpriteShapeModule.xml
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.StreamingModule.xml

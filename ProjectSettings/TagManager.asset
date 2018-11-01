@@ -8,6 +8,13 @@ TagManager:
   - Ground
   - Dialog
   - Placa
+  - PlacaInofensivo
+  - PlacaCasa
+  - PlacaEscuridao
+  - PlacaNome
+  - PlacaCuriosidade
+  - PlacaCuriosidade2
+  - PlacaDuvida
   layers:
   - Default
   - TransparentFX

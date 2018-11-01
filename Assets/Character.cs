@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    bool sabeOnome = false;
     string[] falasAleatorias = { "Outra vez?", "O que está acontecendo?",
         "Isto é um sonho?!",
         "Eu sou um gato ou uma raposa?",
@@ -54,10 +55,14 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        animator.SetBool("IsHurt", true);
-        if (primeiraQueda)
+        Scene level = SceneManager.GetActiveScene();
+        if (level.name == "level0")
         {
-            audioSource.PlayOneShot(FallingSound);
+            animator.SetBool("IsHurt", true);
+            if (primeiraQueda)
+            {
+                audioSource.PlayOneShot(FallingSound);
+            }
         }
     }
 
@@ -65,6 +70,7 @@ public class Character : MonoBehaviour
     {
         horizontalMove = joystick.Horizontal * runSpeed;
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
 
         if ((Input.GetButtonDown("Jump") || joystick.Vertical > 0) && !jumped && !IsHurt)
         {
@@ -95,10 +101,59 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Placa"))
         {
-            var randomInt = Random.Range(0,falasAleatorias.Length);
+            var randomInt = Random.Range(0, falasAleatorias.Length);
             DefineMensagemDialogo(falasAleatorias[randomInt]);
             other.gameObject.GetComponent<Collider2D>().enabled = false;
         }
+
+        if (other.gameObject.CompareTag("PlacaInofensivo"))
+        {
+            DefineMensagemDialogo("Esse sapo é tão inofensivo");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (other.gameObject.CompareTag("PlacaCasa"))
+        {
+            DefineMensagemDialogo("Será que dessa vez eu vou pra casa?");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        if (other.gameObject.CompareTag("PlacaEscuridao"))
+        {
+            DefineMensagemDialogo("Nada além de escuridão aqui");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (other.gameObject.CompareTag("PlacaNome"))
+        {
+            sabeOnome = true;
+            DefineMensagemDialogo("Meu segredo! meu nome é BOB");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (other.gameObject.CompareTag("PlacaCuriosidade"))
+        {
+            DefineMensagemDialogo("Curiosidade matou o gato...");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (other.gameObject.CompareTag("PlacaCuriosidade2"))
+        {
+            DefineMensagemDialogo("Já avisei sobra a curiosidade...");
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+        if (other.gameObject.CompareTag("PlacaDuvida"))
+        {
+            string mensagemDuvida = "Escolha uma a casa e boa sorte";
+
+            if (sabeOnome)
+                mensagemDuvida += ", BOB";
+
+            DefineMensagemDialogo(mensagemDuvida);
+            other.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -140,7 +195,7 @@ public class Character : MonoBehaviour
 
     IEnumerator Restart()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void DefineMensagemDialogo(string mensagem)
