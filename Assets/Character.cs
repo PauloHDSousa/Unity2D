@@ -6,18 +6,24 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     bool sabeOnome = false;
-    string[] falasAleatorias = { "Outra vez?", "O que está acontecendo?",
+    string[] falasAleatorias = { "Outra vez?", 
+        "O que está acontecendo?",
+        "Não roube! O Governo não gosta de concorrência",
         "Isto é um sonho?!",
         "Eu sou um gato ou uma raposa?",
         "Essa música me da vontade de dançar",
         "Quantas vidas será que eu tenho?",
+        "Onde há fumaça, há alguém com olho lacrimejando.",
+        "Aquela cantora preferida do Natal: Fafá de Belém.",
+        "Miau...",
+        "Acho que o carro preferido dos ursos, é o Polo.",
         "E se eu dormir?",
         "Se um gato tem 7 vidas, ele pode morrer 7 ou 8 vezes?",
         "Quero meu dono",
         "Eu adoraria as manhãs, se elas começassem mais tarde!",
         "Prefiro calçar as botas do que fazer exercício.",
         "Odeio as Segundas-feiras!",
-        "É difícil ser humilde quando se é o melhor.",
+        "Desistir é para os fracos. Faça como eu, nem tente.",
         "Dormir abre-me o apetite, comer me da sono... a vida é bela",
         "Não sou gordo. Sou é baixo para o meu peso.",
         "Eu já falei que quero minha casa?",
@@ -52,11 +58,11 @@ public class Character : MonoBehaviour
     bool jump = false;
     bool crouch = false;
     public Joystick joystick;
-
+    Scene level;
     void Start()
     {
-        Scene level = SceneManager.GetActiveScene();
-        if (level.name == "level0")
+        level = SceneManager.GetActiveScene();
+        if (level.name == "Level0")
         {
             animator.SetBool("IsHurt", true);
             if (primeiraQueda)
@@ -163,7 +169,7 @@ public class Character : MonoBehaviour
             jumped = false;
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsHurt", IsHurt);
-            if (primeiraQueda)
+            if (primeiraQueda && level.name == "Level0")
             {
                 DefineMensagemDialogo("Aonde estou?");
                 primeiraQueda = false;

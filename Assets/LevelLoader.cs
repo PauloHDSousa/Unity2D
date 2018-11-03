@@ -1,36 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelLoader : MonoBehaviour
 {
-
-    bool playerInZone = false;
     public string levelToLoad = "";
+    public Animator animTransition;
+    public Animator musicTransition;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        if (/*(Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown("Jump")) || */ playerInZone)
-        {
-            SceneManager.LoadScene(levelToLoad);
-        }
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "Player")
-            playerInZone = true;
-
+             StartCoroutine(LoadScene());
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    IEnumerator LoadScene()
     {
-        if (other.name == "Player")
-            playerInZone = false;
+        if(musicTransition != null)
+            musicTransition.SetTrigger("FadeOut");
+        
+        animTransition.SetTrigger("end");
+        yield return new WaitForSeconds(2f);
+         SceneManager.LoadScene(levelToLoad);
     }
 }
