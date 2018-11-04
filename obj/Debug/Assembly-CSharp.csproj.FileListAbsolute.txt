@@ -512,5 +512,3 @@ C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\Unity.2D.SpriteShape.Ed
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\Unity.2D.SpriteShape.Runtime.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\Unity.InternalAPIEditorBridge.001.dll
 C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\Unity.InternalAPIEngineBridge.001.dll
-C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
-C:\Users\Paulo\Downloads\2DAssets\Unity2D\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml

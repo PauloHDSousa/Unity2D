@@ -5,35 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    bool exibirMensagem = true;
     bool sabeOnome = false;
     string[] falasAleatorias = { 
         "Só tenho medo de água.", 
-        "O que está acontecendo?",
+        "Olha uma latinha com o seu nome! - aff, pai! - que foi Mucilon?",
         "Não roube! O Governo não gosta de concorrência",
-        "Isto é um sonho?!",
+        "Sabe o que o Catchup malandro disse para o sal? É nóis nas frita mano",
         "O bom daqui é que não tenho inimigos",
         "Eu sou um gato ou uma raposa?",
         "Essa música me da vontade de dançar",
-        "Quantas vidas será que eu tenho?",
+        "Qual é o cúmulo da força??? R: Dobrar a rua",
         "Onde há fumaça, há alguém com olho lacrimejando.",
         "Aquela cantora preferida do Natal: Fafá de Belém.",
-        "Miau...",
         "Acho que o carro preferido dos ursos, é o Polo.",
-        "Que sono... zZzZzZz",
+        "Dois tomates atravessavam a rua e um diz para o outro: - Olha o carro! ploft! - Aonde? ploft!",
         "Se um gato tem 7 vidas, ele pode morrer 7 ou 8 vezes?",
-        "Quero meu dono",
+        "O que o carbono disse quando foi preso? Eu tenho direito a 4 ligações!",
         "Eu adoraria as manhãs, se elas começassem mais tarde!",
         "Prefiro calçar as botas do que fazer exercício.",
-        "Odeio as Segundas-feiras!",
-        "Desistir é para os fracos. Faça como eu, nem tente.",
-        "Dormir abre-me o apetite, comer me da sono... a vida é bela",
         "Não sou gordo. Sou é baixo para o meu peso.",
-        "Eu já falei que quero minha casa?",
-        "Nunca mais vou comer lixo da vizinha",
-        "Uma vez eu estava comendo o lixo e o bob me atacou, cara...",
-        "Miau!",
-        "Ouvi dizer que 5 patinhos foram passear, sem a mãe deles",
-        "LAMBDA LAMBDA LAMBDA Nerds!",
+        "Já sei, estou na Matrix, só tenho que achar um telefone.",
+        "Ouvi dizer que 5 patinhos foram passear, sem a mãe deles, que mãe sem noção",
+        "LAMBDA LAMBDA LAMBDA NERDS!",
         "Porque uma pessoa adota um cachorro se existem gatos?",
         "Você conhece a piada do gato? claro que não, gato não pia"
     };
@@ -45,7 +39,6 @@ public class Character : MonoBehaviour
     public AudioClip JumpSound;
     public AudioClip DeathSound;
     public AudioClip FallingSound;
-    public Canvas canvas;
     private Vector2 touchOrigin = -Vector2.one;
     public Text dialog;
 
@@ -105,6 +98,9 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if(!exibirMensagem)
+            return;
+
         if (other.gameObject.CompareTag("Placa"))
         {
             var randomInt = Random.Range(0, falasAleatorias.Length);
@@ -218,7 +214,9 @@ public class Character : MonoBehaviour
 
     IEnumerator EscondeMensagemDialogo()
     {
-        yield return new WaitForSeconds(3);
+        exibirMensagem = false;
+        yield return new WaitForSeconds(5);
         dialog.gameObject.SetActive(false);
+        exibirMensagem = true;
     }
 }
