@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     bool sabeOnome = false;
-    string[] falasAleatorias = { "Outra vez?", 
+    string[] falasAleatorias = { 
+        "Só tenho medo de água.", 
         "O que está acontecendo?",
         "Não roube! O Governo não gosta de concorrência",
         "Isto é um sonho?!",
+        "O bom daqui é que não tenho inimigos",
         "Eu sou um gato ou uma raposa?",
         "Essa música me da vontade de dançar",
         "Quantas vidas será que eu tenho?",
@@ -17,7 +19,7 @@ public class Character : MonoBehaviour
         "Aquela cantora preferida do Natal: Fafá de Belém.",
         "Miau...",
         "Acho que o carro preferido dos ursos, é o Polo.",
-        "E se eu dormir?",
+        "Que sono... zZzZzZz",
         "Se um gato tem 7 vidas, ele pode morrer 7 ou 8 vezes?",
         "Quero meu dono",
         "Eu adoraria as manhãs, se elas começassem mais tarde!",
@@ -31,7 +33,7 @@ public class Character : MonoBehaviour
         "Uma vez eu estava comendo o lixo e o bob me atacou, cara...",
         "Miau!",
         "Ouvi dizer que 5 patinhos foram passear, sem a mãe deles",
-        "LAMBDA LAMBDA LAMBDA Nerds! meu dono ouvia isso direto...",
+        "LAMBDA LAMBDA LAMBDA Nerds!",
         "Porque uma pessoa adota um cachorro se existem gatos?",
         "Você conhece a piada do gato? claro que não, gato não pia"
     };
@@ -46,7 +48,6 @@ public class Character : MonoBehaviour
     public Canvas canvas;
     private Vector2 touchOrigin = -Vector2.one;
     public Text dialog;
-    bool primeiraQueda = true;
 
     //Para evitar pulo Duplo
     bool jumped = false;
@@ -59,16 +60,17 @@ public class Character : MonoBehaviour
     bool crouch = false;
     public Joystick joystick;
     Scene level;
+    bool jaCaiu;
+
     void Start()
     {
+        jaCaiu = PlayerPrefs.GetInt("jaCaiu") == 1;
         level = SceneManager.GetActiveScene();
         if (level.name == "Level0")
         {
             animator.SetBool("IsHurt", true);
-            if (primeiraQueda)
-            {
-                audioSource.PlayOneShot(FallingSound);
-            }
+            audioSource.PlayOneShot(FallingSound);
+            DefineMensagemDialogo("?????");
         }
     }
 
@@ -84,8 +86,6 @@ public class Character : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
             audioSource.PlayOneShot(JumpSound);
-            //Instantiate(effect, transform.position, Quaternion.identity);
-
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
         }
 
@@ -169,19 +169,24 @@ public class Character : MonoBehaviour
             jumped = false;
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsHurt", IsHurt);
-            if (primeiraQueda && level.name == "Level0")
+            if (level.name == "Level0")
             {
-                DefineMensagemDialogo("Aonde estou?");
-                primeiraQueda = false;
+                
+                if(!jaCaiu){
+                    PlayerPrefs.SetInt("jaCaiu", 1);
+                    jaCaiu = true;
+                    DefineMensagemDialogo("Que lugar é esse? Parece que já sonhei com isso");
+                }
+                
             }
         }
     }
 
     public void GameOver()
     {
+        animator.SetBool("IsJumping", false);
         IsHurt = true;
         animator.SetBool("IsHurt", IsHurt);
-        audioSource.Stop();
         audioSource.PlayOneShot(DeathSound);
         StartCoroutine(Restart());
     }
@@ -201,7 +206,7 @@ public class Character : MonoBehaviour
 
     IEnumerator Restart()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void DefineMensagemDialogo(string mensagem)

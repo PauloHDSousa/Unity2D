@@ -8,6 +8,11 @@ public class LevelLoader : MonoBehaviour
     public Animator animTransition;
     public Animator musicTransition;
 
+    public void GoToCredits()
+    {
+        StartCoroutine(LoadScene());
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "Player")
@@ -16,11 +21,10 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        if(musicTransition != null)
-            musicTransition.SetTrigger("FadeOut");
-        
         animTransition.SetTrigger("end");
+        musicTransition.SetTrigger("FadeOut");
+        
         yield return new WaitForSeconds(2f);
-         SceneManager.LoadScene(levelToLoad);
+        SceneManager.LoadScene(levelToLoad);
     }
 }
